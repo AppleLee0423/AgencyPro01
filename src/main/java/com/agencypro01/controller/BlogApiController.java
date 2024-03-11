@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class BlogApiController {
-
+/*
     private final BlogService blogService;
 
     //글 등록
@@ -68,4 +68,5 @@ public class BlogApiController {
     public String test() {
         return "나는 이충주다";
     }
+ */
 }

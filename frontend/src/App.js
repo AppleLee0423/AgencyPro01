@@ -1,20 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import React , { useState, useEffect }  from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ArticleList from './components/ArticleList';
+import axios from 'axios';
 
-function App() {
-  const [data, setData] = useState('')
+const App = () => {
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/test')
-        .then(res => setData(res.data))
-        .catch(err => console.log(err))
+    axios.get('/api/articles')
+        .then(response => setArticles(response.data))
+        .catch(error => console.error(error));
   }, []);
 
   return (
-      <div>
-        {data}
-      </div>
+      <Router>
+        <Routes>
+            <Route path="/" element={<ArticleList articles={articles} />} />
+        </Routes>
+      </Router>
   );
-}
+};
 
 export default App;
