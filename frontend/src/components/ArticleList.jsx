@@ -37,7 +37,7 @@ const ArticleList = () => {
                         <h1 className="mb-3">My Blog</h1>
                         <h4 className="mb-3">블로그에 오신 것을 환영합니다.</h4>
                     </div>
-                    <Link to="/new-article" className="btn btn-secondary btn-sm mb-3">
+                    <Link to="/api/articles/new" className="btn btn-secondary btn-sm mb-3">
                         글 등록
                     </Link>
                     {articles.map((article) => (
