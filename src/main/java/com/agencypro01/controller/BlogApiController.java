@@ -1,9 +1,7 @@
 package com.agencypro01.controller;
 
 import com.agencypro01.domain.Article;
-import com.agencypro01.dto.AddArticleRequest;
-import com.agencypro01.dto.ArticleResponse;
-import com.agencypro01.dto.UpdateArticleRequest;
+import com.agencypro01.dto.*;
 import com.agencypro01.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -16,23 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class BlogApiController {
-/*
-    private final BlogService blogService;
 
-    //글 등록
-    @PostMapping("/api/articles")
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
-        Article savedArticle = blogService.save(request);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(savedArticle);
-    }
+    private final BlogService blogService;
 
     //글 조회
     @GetMapping("/api/articles")
-    public ResponseEntity<List<ArticleResponse>> findAllArticles() {
-        List<ArticleResponse> articles = blogService.findAll()
+    public ResponseEntity<List<ArticleListViewResponse>> findAllArticles() {
+        List<ArticleListViewResponse> articles = blogService.findAll()
                 .stream()
-                .map(ArticleResponse::new)
+                .map(ArticleListViewResponse::new)
                 .toList();
 
         return ResponseEntity.ok()
@@ -41,10 +31,20 @@ public class BlogApiController {
 
     //글 상세조회
     @GetMapping("/api/articles/{id}")
-    public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id) {
+    public ResponseEntity<ArticleViewResponse> findArticle(@PathVariable long id) {
         Article article = blogService.findById(id);
+        ArticleViewResponse response = new ArticleViewResponse(article);
         return ResponseEntity.ok()
-                .body(new ArticleResponse(article));
+                .body(response);
+    }
+
+
+    //글 등록
+    @PostMapping("/api/articles")
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
+        Article savedArticle = blogService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(savedArticle);
     }
 
     //글 삭제
@@ -68,5 +68,4 @@ public class BlogApiController {
     public String test() {
         return "나는 이충주다";
     }
- */
 }

@@ -1,9 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Container, Row, Col, Card} from "react-bootstrap";
 
-const ArticleList = ({ articles }) => {
+const ArticleList = () => {
+    const [articles, setArticles] = useState([]);
+
+    const getArticles = async () => {
+        await axios.get('/api/articles')
+            .then((response) => {
+                console.log('articles');
+                console.log(response.data);
+
+                setArticles(response.data);
+            })
+            .catch((error) => {
+                console.log('articles error:<');
+                console.log(error);
+            });
+    }
+
+    useEffect(() => {
+        getArticles();
+    }, []);
+
     const logout = () => {
         // 로그아웃 로직 구현
     };
@@ -25,7 +46,7 @@ const ArticleList = ({ articles }) => {
                             <Card.Body>
                                 <Card.Title>{article.title}</Card.Title>
                                 <Card.Text>{article.content}</Card.Text>
-                                <Link to={`/articles/${article.id}`} className="btn btn-primary">
+                                <Link to={`/api/articles/${article.id}`} className="btn btn-primary">
                                     보러 가기
                                 </Link>
                             </Card.Body>
