@@ -27,6 +27,7 @@ const ArticleList = () => {
 
     const logout = () => {
         // 로그아웃 로직 구현
+        window.location.href = '/logout';
     };
 
     return (
